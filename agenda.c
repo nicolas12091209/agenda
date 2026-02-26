@@ -5,6 +5,7 @@
 #include "agenda.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "interface.h"
 
@@ -19,7 +20,19 @@ typedef struct agenda {
     int tamanho;
 } agenda_t;
 
+int adicionar_contato(agenda_t* agenda) {
+
+    solicitar_contato();
+
+    return 0;
+}
+
+
 int init_agenda() {
+
+    agenda_t* agenda = malloc(sizeof(agenda_t));
+    agenda->contato = malloc(100 * sizeof(contato_t));
+    agenda->tamanho = 0;
 
     int opção = 9;
 
@@ -27,7 +40,7 @@ int init_agenda() {
        opção = exibir_menu();
         switch (opção) {
             case 1:
-                printf("adicionando contato...\n");
+                adicionar_contato();
                 break;
             case 2:
                 printf("Listando o contato...\n");
@@ -35,8 +48,9 @@ int init_agenda() {
             case 3:
                 printf("Buscando o contato...\n");
                 break;
-            case 4:
+            case 0:
                 printf("Saindo...\n");
+                // TODO implementar liberação de memória;
                 break;
             default:
                 printf("Opcao invalida\n");
